@@ -1,0 +1,164 @@
+{
+  "id": 7,
+  "zpid": "41234567",
+  "market_id": 1,
+  "is_reference": false,
+  "deal_status": "analyst_started",
+  "deal_submitted": null,
+  "property_address": "1240 Ski View Dr, Gatlinburg, TN 37738",
+  "street": "1240 Ski View Dr",
+  "city": "Gatlinburg",
+  "state": "TN",
+  "bedrooms": 3,
+  "bathrooms": "3.0",
+  "sleep_count_low": null,
+  "sleep_count_high": null,
+  "purchase_price": "675000.00",
+  "total_oop": "212250.00",
+  "prr": "0.1926",
+  "budget_to_pp": "0.3144",
+  "low_gross_revenue": "110000.00",
+  "mid_gross_revenue": "130000.00",
+  "high_gross_revenue": "150000.00",
+  "l_cash_on_cash": "0.2736",
+  "m_cash_on_cash": "0.3660",
+  "h_cash_on_cash": "0.4585",
+  "optimization_total": "57000.00",
+  "operating_expense_total": "770.00",
+  "turnkey": true,
+  "furnished": false,
+  "luxury": false,
+  "tax_efficient": false,
+  "new_construction": false,
+  "existing_airbnb": false,
+  "arv": false,
+  "high_cash_on_cash": false,
+  "low_cash_on_cash": false,
+  "add_inground_pool": false,
+  "waterfront": false,
+  "remote": false,
+  "can_support_cohost": false,
+  "renovation_level": null,
+  "deal_complexity": null,
+  "listing_url": "https://www.zillow.com/homedetails/1240-Ski-View-Dr/41234567_zpid/",
+  "deal_pitch": null,
+  "note": null,
+  "created_at": "2026-10-06T18:28:44.947019Z",
+  "updated_at": "2026-10-06T18:28:44.983380Z",
+  "detail": {
+    "purchase_details": {
+      "loan_amount": "540000.00",
+      "interest_rate": "0.0699",
+      "mortgage_years": 30,
+      "purchase_price": "675000",
+      "down_payment_pct": "0.2",
+      "closing_costs_pct": "0.03",
+      "down_payment_amount": "135000.00",
+      "closing_costs_amount": "20250.00"
+    },
+    "y1_coc_incl_tax_savings": {
+      "low_pct": "0.4297",
+      "mid_pct": "0.5221",
+      "high_pct": "0.6146"
+    },
+    "forecasted_revenue": {
+      "scenarios": {
+        "low": {
+          "co_hosting_fee": "0.00",
+          "cash_on_cash_pct": "0.2736",
+          "forecasted_revenue": "110000.00",
+          "principal_pay_down": "5495.95",
+          "debt_service_annual": "43068.09",
+          "net_operating_income": "101129.60",
+          "annual_free_cash_flow": "58061.51",
+          "annual_re_appreciation": "20250.00",
+          "operating_expenses_annual": "8870.40",
+          "annual_total_re_return_pct": "0.3949"
+        },
+        "mid": {
+          "co_hosting_fee": "0.00",
+          "cash_on_cash_pct": "0.3660",
+          "forecasted_revenue": "130000.00",
+          "principal_pay_down": "5495.95",
+          "debt_service_annual": "43068.09",
+          "net_operating_income": "120760.00",
+          "annual_free_cash_flow": "77691.91",
+          "annual_re_appreciation": "20250.00",
+          "operating_expenses_annual": "9240.00",
+          "annual_total_re_return_pct": "0.4873"
+        },
+        "high": {
+          "co_hosting_fee": "0.00",
+          "cash_on_cash_pct": "0.4585",
+          "forecasted_revenue": "150000.00",
+          "principal_pay_down": "5495.95",
+          "debt_service_annual": "43068.09",
+          "net_operating_income": "140390.40",
+          "annual_free_cash_flow": "97322.31",
+          "annual_re_appreciation": "20250.00",
+          "operating_expenses_annual": "9609.60",
+          "annual_total_re_return_pct": "0.5798"
+        }
+      },
+      "co_hosting_fee_pct": "0",
+      "annual_re_appreciation_pct": "0.03"
+    },
+    "zillow_property": {
+      "area": 2150,
+      "beds": 3,
+      "zpid": "41234567",
+      "baths": 3,
+      "price": "$675,000",
+      "address": "1240 Ski View Dr, Gatlinburg, TN 37738",
+      "img_src": "https://picsum.photos/seed/gatlinburg/640/420",
+      "home_type": "SINGLE_FAMILY",
+      "detail_url": "https://www.zillow.com/homedetails/1240-Ski-View-Dr/41234567_zpid/"
+    },
+    "analyst_notes": null
+  },
+  "taxes": {
+    "land_assumptions_pct": "0.2000",
+    "sla_multiplier_pct": "0.2500",
+    "improvement_basis": "597000.00",
+    "estimated_short_life_assets": "149250.00",
+    "bonus_amount_pct": "0.6000",
+    "tax_rate_pct": "0.3700",
+    "y1_loss_from_depreciation": "89550.00",
+    "tax_savings": "33133.50"
+  },
+  "optimization_items": [
+    {
+      "category": "Furniture & design",
+      "total_price": "45000.00",
+      "metric": null,
+      "base_price": null,
+      "spec": null,
+      "tier": null,
+      "notes": null,
+      "id": 18
+    },
+    {
+      "category": "Hot tub",
+      "total_price": "12000.00",
+      "metric": null,
+      "base_price": null,
+      "spec": null,
+      "tier": null,
+      "notes": null,
+      "id": 19
+    }
+  ],
+  "operating_expenses": [
+    {
+      "expense_name": "Utilities",
+      "monthly_amount": "450.00",
+      "id": 53
+    },
+    {
+      "expense_name": "Insurance",
+      "monthly_amount": "320.00",
+      "id": 54
+    }
+  ],
+  "comp_set": []
+}

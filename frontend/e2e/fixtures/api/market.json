@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "name": "Smoky & Blue Ridge Mountains",
+  "slug": "smoky-blue-ridge-mountains",
+  "state": null,
+  "region": "Southern Appalachia",
+  "country": "US",
+  "timezone": "America/New_York",
+  "description": "Drive-to cabin market spanning the Tennessee Smokies and the north Georgia mountains. Year-round demand; views and hot tubs carry ADR.",
+  "is_active": true,
+  "property_count": 3,
+  "created_at": "2026-10-06T18:28:44.204912Z"
+}

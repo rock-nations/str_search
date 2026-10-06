@@ -1,0 +1,256 @@
+{
+  "id": 1,
+  "zpid": "41234567",
+  "market_id": 1,
+  "is_reference": true,
+  "deal_status": "training_deal",
+  "deal_submitted": null,
+  "property_address": "1240 Ski View Dr, Gatlinburg, TN 37738",
+  "street": "1240 Ski View Dr",
+  "city": "Gatlinburg",
+  "state": "TN",
+  "bedrooms": 3,
+  "bathrooms": "3.0",
+  "sleep_count_low": 8,
+  "sleep_count_high": 10,
+  "purchase_price": "660000.00",
+  "total_oop": "217800.00",
+  "prr": "0.1894",
+  "budget_to_pp": "0.3300",
+  "low_gross_revenue": "105000.00",
+  "mid_gross_revenue": "125000.00",
+  "high_gross_revenue": "142000.00",
+  "l_cash_on_cash": "0.1909",
+  "m_cash_on_cash": "0.2786",
+  "h_cash_on_cash": "0.3526",
+  "optimization_total": "66000.00",
+  "operating_expense_total": "1850.00",
+  "turnkey": false,
+  "furnished": false,
+  "luxury": false,
+  "tax_efficient": false,
+  "new_construction": false,
+  "existing_airbnb": false,
+  "arv": false,
+  "high_cash_on_cash": false,
+  "low_cash_on_cash": false,
+  "add_inground_pool": false,
+  "waterfront": false,
+  "remote": false,
+  "can_support_cohost": false,
+  "renovation_level": 2,
+  "deal_complexity": 2,
+  "listing_url": "https://www.zillow.com/homedetails/1240-Ski-View-Dr/41234567_zpid/",
+  "deal_pitch": "Mountain-view cabin near Ober; strong year-round demand.",
+  "note": null,
+  "created_at": "2026-10-06T18:28:44.204912Z",
+  "updated_at": "2026-10-06T18:28:44.256824Z",
+  "detail": {
+    "purchase_details": {
+      "loan_amount": "528000.00",
+      "interest_rate": "0.0699",
+      "mortgage_years": 30,
+      "purchase_price": "660000",
+      "down_payment_pct": "0.20",
+      "closing_costs_pct": "0.03",
+      "down_payment_amount": "132000.00",
+      "closing_costs_amount": "19800.00"
+    },
+    "y1_coc_incl_tax_savings": {
+      "low_pct": "0.3423",
+      "mid_pct": "0.4300",
+      "high_pct": "0.5040"
+    },
+    "forecasted_revenue": {
+      "scenarios": {
+        "low": {
+          "co_hosting_fee": "0.00",
+          "cash_on_cash_pct": "0.1909",
+          "forecasted_revenue": "105000.00",
+          "principal_pay_down": "5373.82",
+          "debt_service_annual": "42111.02",
+          "net_operating_income": "83688.00",
+          "annual_free_cash_flow": "41576.98",
+          "annual_re_appreciation": "19800.00",
+          "operating_expenses_annual": "21312.00",
+          "annual_total_re_return_pct": "0.3065"
+        },
+        "mid": {
+          "co_hosting_fee": "0.00",
+          "cash_on_cash_pct": "0.2786",
+          "forecasted_revenue": "125000.00",
+          "principal_pay_down": "5373.82",
+          "debt_service_annual": "42111.02",
+          "net_operating_income": "102800.00",
+          "annual_free_cash_flow": "60688.98",
+          "annual_re_appreciation": "19800.00",
+          "operating_expenses_annual": "22200.00",
+          "annual_total_re_return_pct": "0.3942"
+        },
+        "high": {
+          "co_hosting_fee": "0.00",
+          "cash_on_cash_pct": "0.3526",
+          "forecasted_revenue": "142000.00",
+          "principal_pay_down": "5373.82",
+          "debt_service_annual": "42111.02",
+          "net_operating_income": "118912.00",
+          "annual_free_cash_flow": "76800.98",
+          "annual_re_appreciation": "19800.00",
+          "operating_expenses_annual": "23088.00",
+          "annual_total_re_return_pct": "0.4682"
+        }
+      },
+      "co_hosting_fee_pct": "0.0",
+      "annual_re_appreciation_pct": "0.03"
+    },
+    "zillow_property": {
+      "area": 2150,
+      "beds": 3,
+      "zpid": "41234567",
+      "baths": 3,
+      "price": "$675,000",
+      "address": "1240 Ski View Dr, Gatlinburg, TN 37738",
+      "img_src": "https://picsum.photos/seed/gatlinburg/640/420",
+      "home_type": "SINGLE_FAMILY",
+      "detail_url": "https://www.zillow.com/homedetails/1240-Ski-View-Dr/41234567_zpid/"
+    },
+    "analyst_notes": null
+  },
+  "taxes": {
+    "land_assumptions_pct": "0.2000",
+    "sla_multiplier_pct": "0.2500",
+    "improvement_basis": "594000.00",
+    "estimated_short_life_assets": "148500.00",
+    "bonus_amount_pct": "0.6000",
+    "tax_rate_pct": "0.3700",
+    "y1_loss_from_depreciation": "89100.00",
+    "tax_savings": "32967.00"
+  },
+  "optimization_items": [
+    {
+      "category": "Furniture & design",
+      "total_price": "45000.00",
+      "metric": null,
+      "base_price": null,
+      "spec": null,
+      "tier": null,
+      "notes": null,
+      "id": 1
+    },
+    {
+      "category": "Hot tub",
+      "total_price": "12000.00",
+      "metric": null,
+      "base_price": null,
+      "spec": null,
+      "tier": null,
+      "notes": null,
+      "id": 2
+    },
+    {
+      "category": "Game room",
+      "total_price": "9000.00",
+      "metric": null,
+      "base_price": null,
+      "spec": null,
+      "tier": null,
+      "notes": null,
+      "id": 3
+    }
+  ],
+  "operating_expenses": [
+    {
+      "expense_name": "Utilities",
+      "monthly_amount": "450.00",
+      "id": 1
+    },
+    {
+      "expense_name": "Internet",
+      "monthly_amount": "90.00",
+      "id": 2
+    },
+    {
+      "expense_name": "Insurance",
+      "monthly_amount": "320.00",
+      "id": 3
+    },
+    {
+      "expense_name": "Property Taxes",
+      "monthly_amount": "410.00",
+      "id": 4
+    },
+    {
+      "expense_name": "Lawn And Snow",
+      "monthly_amount": "120.00",
+      "id": 5
+    },
+    {
+      "expense_name": "Supplies",
+      "monthly_amount": "150.00",
+      "id": 6
+    },
+    {
+      "expense_name": "Software",
+      "monthly_amount": "60.00",
+      "id": 7
+    },
+    {
+      "expense_name": "Maintenance Reserve",
+      "monthly_amount": "250.00",
+      "id": 8
+    }
+  ],
+  "comp_set": [
+    {
+      "listing_url": "https://www.airbnb.com/rooms/1001",
+      "revenue": "118000.00",
+      "bedrooms": 3,
+      "sleeps": 9,
+      "is_favourite": false,
+      "has_pool": null,
+      "has_hot_tub": null,
+      "has_sauna": null,
+      "has_mini_golf": null,
+      "has_game_room": null,
+      "has_pickleball": null,
+      "has_movie_theater": null,
+      "has_playground": null,
+      "has_waterfront": null,
+      "id": 1
+    },
+    {
+      "listing_url": "https://www.airbnb.com/rooms/1002",
+      "revenue": "131000.00",
+      "bedrooms": 3,
+      "sleeps": 10,
+      "is_favourite": false,
+      "has_pool": null,
+      "has_hot_tub": null,
+      "has_sauna": null,
+      "has_mini_golf": null,
+      "has_game_room": null,
+      "has_pickleball": null,
+      "has_movie_theater": null,
+      "has_playground": null,
+      "has_waterfront": null,
+      "id": 2
+    },
+    {
+      "listing_url": "https://www.airbnb.com/rooms/1003",
+      "revenue": "109500.00",
+      "bedrooms": 3,
+      "sleeps": 8,
+      "is_favourite": false,
+      "has_pool": null,
+      "has_hot_tub": null,
+      "has_sauna": null,
+      "has_mini_golf": null,
+      "has_game_room": null,
+      "has_pickleball": null,
+      "has_movie_theater": null,
+      "has_playground": null,
+      "has_waterfront": null,
+      "id": 3
+    }
+  ]
+}
