@@ -21,6 +21,7 @@ Three decisions follow from that:
 | 3 | **Workspace** | Four steps in a left rail: Financials, Analysis, Deal tags, Review & submit. Navigation is **non-linear**, because analysts jump around. Each step shows its own state: *4 to complete*, *2 to fix* (red only for invalid values), *Complete* or *Optional*. The step lives in the URL (`?step=analysis`), so reloads, links and the back button work. |
 | 4 | **Review & submit** | A readiness banner and a checklist grouped by section. Each open item has a **Fix** link that switches step, scrolls to the field and focuses it. Non-blocking warnings ("Low forecast is above Mid", "no operating expenses") are separate from blocking errors. A key-assumptions summary and the graded Mid forecast make the final check quick. |
 | 5 | **Results** | Covered in its own section below. |
+| 6 | **Team** | Where every trainee stands and what each should practise. Covered in its own section below. |
 
 Submitting asks for confirmation. The dialog shows the Low, Mid and High forecasts with Mid highlighted, and says what happens next: the attempt locks and the analyst's underwriting is revealed.
 
@@ -33,8 +34,29 @@ The brief asks to "explain the score, not just display it". The results page doe
 - **A band scale.** Best, Medium and Low are drawn as zones around the analyst's number, with dollar ticks at ±10% and ±25% and a marker for the trainee. The scale zooms out for big misses, and the marker clamps with an arrow when it is off the scale.
 - **A next-band hint.** "A Mid forecast between $112,500 – $137,500 would have scored Best."
 - **Score bands for this property.** The dollar range for each band, with the trainee's band highlighted.
-- **A leaderboard.** "This attempt placed 2nd of 3." It ranks every graded attempt on the property by closeness, highlights the current one, and links to the others.
+- **A leaderboard with two tabs.** *Team* ranks every trainee on this property by their latest attempt ("You placed 3rd of 7 trainees"), with retakes marked. *Your attempts* ranks your own attempts on the property by closeness and links to each one.
 - **Your underwriting vs the analyst's.** Revealed only now. It compares inputs and outputs with signed differences, with Mid marked *Graded*. Above the table, a short list of the **biggest differences in your inputs** turns the table into a lesson ("Your monthly operating expenses were 58% lower than the analyst's").
+
+## The team view
+
+The hiring team asked for a mocked, per-trainee leaderboard with a team component. Its purpose: lead analysts should see who is doing best and what kind of training each person needs, for example "construction estimates are good but revenue forecasts are off", or "struggles with properties in certain markets".
+
+- **Who is real.** The API has no users. Every attempt submitted through it is "You", and six teammates are fixed demo data. A "Teammates are demo data" badge says so on every team screen. Each teammate shows one pattern a lead would want to spot:
+  - strong all-round;
+  - setup budgets far below the analyst's;
+  - weak in two markets;
+  - overestimates revenue;
+  - running costs far below the analyst's;
+  - a high score built on retakes.
+- **One rule for the score.** The team average uses each trainee's latest attempt per property, the same rule as the API's dashboard average, which the hiring team confirmed. Ties go to whoever has completed more cases.
+- **The Team page** answers three questions, in order:
+  - Where do I stand? A "Your standing" card.
+  - Who is doing best? A leaderboard with average, first try, cases, Best-rated count and the main coaching focus.
+  - What does each person need? A skills grid. It shows how far revenue, setup-budget and running-cost estimates land from the analyst's, and the average score in each market. It uses the same green, amber and red bands as the score, so "within 10%" means the same thing everywhere.
+- **Coaching notes are plain sentences.** "Setup and renovation budgets run 35% below the analyst's. Review furniture, amenity and renovation pricing." They come from simple, unit-tested thresholds in `src/lib/team/stats.ts`. A market is only flagged when it is clearly worse than the trainee's other properties, so a generally weak trainee isn't flagged for every market.
+- **Retake gaming stays visible.** The hiring team agreed attempts shouldn't be gameable. Because the analyst's numbers are revealed after submitting, the team view shows a first-try average next to every score. It flags "relies on retakes" when retakes lift the average by 20 points or more.
+- **Your skills use your real numbers.** Your setup spend and monthly costs are compared with the analyst's underwriting, which the app fetches only for properties you've already submitted. The demo data is stored as percentages, never dollars, so nothing on the Team page reveals an analyst's number early.
+- **Each trainee has a profile.** It shows their average, first try, cases, a bar for each skill, market results, coaching notes, and every attempt. Your own attempts link to their results pages.
 
 ## Numbers that are easy to read
 
@@ -85,6 +107,7 @@ app/ (routes, server components)  →  features/<screen>/ (client components)
                                           ↓ /api/backend/* (route handler proxy)
                                      FastAPI
 lib/underwriting (pure, unit-tested): fields · calc · form-schema · mappers · review
+lib/team (pure, unit-tested): demo teammates · team statistics · coaching rules
 ```
 
 - **Routes are thin server components** that read the URL params (async in Next 16) and render a client feature module. Data is fetched in the browser with TanStack Query. That gives one cache that save and submit update directly. It gives explicit loading, empty and error states. And it gives Playwright control over every API response, which is what makes the mocked failure tests possible. The trade-off is no server-rendered data on first paint. For an authenticated internal tool that is an acceptable cost.
@@ -95,7 +118,7 @@ lib/underwriting (pure, unit-tested): fields · calc · form-schema · mappers �
 
 ## What I'd do next
 
-- Add authentication and trainee identity, so the leaderboard can rank people instead of attempts.
+- Replace the demo teammates with real trainee identities from the API. Only the data source in `src/lib/team/` would change.
 - Add the comp set editor. Comparable listings are the main evidence for a revenue forecast, and the API already supports them.
 - Show scoring trends over time on the dashboard.
 - Run the full suite in CI on every push. The workflow is ready but hasn't run yet.

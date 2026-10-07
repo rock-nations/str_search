@@ -34,4 +34,5 @@ The Next.js app for the underwriting training platform. Setup, tests and an over
 - `src/lib/underwriting/calc.ts` is the live-preview port of the backend calculator, with the same rounding.
 - `src/lib/underwriting/mappers.ts` converts between the form (percent as 0–100) and the API (fractions). It only sends sections that are valid.
 - `src/features/workspace/use-autosave.ts` is the debounced, non-overlapping autosave.
+- `src/lib/team/` holds the team logic. `demo-team.ts` is the labelled demo teammates; `stats.ts` holds the averages, skill levels, coaching notes and rankings. `src/features/team/use-team.ts` combines them with your real attempts from the API.
 - `src/app/api/backend/[...path]/route.ts` is the same-origin proxy to FastAPI.

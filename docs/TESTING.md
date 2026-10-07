@@ -21,9 +21,9 @@ Playwright starts its own **production build** of the app on port 3100. That is 
 Results from the last full run:
 
 ```
-Running 44 tests using 1 worker
+Running 51 tests using 1 worker
   1 skipped      (the opt-in demo failure)
-  43 passed (1.5m)
+  50 passed (1.6m)
 ```
 
 ### Live project (real FastAPI + Postgres)
@@ -34,21 +34,24 @@ Running 44 tests using 1 worker
 | `live/scoring-matrix.spec.ts` | 22 | **Data-driven evaluation** for every seeded property in every band, plus the four boundary cases (see below). Each case asserts the score, the rating, the deviation sentence and the property's Best range. |
 | `live/validation.spec.ts` | 5 | The missing-field checklist and blocked submit. *Fix* focuses the field. Invalid values (120%, `abc`, 2.5 years, negative revenue, a nameless expense row) show inline errors **and are never sent to the API**. A $0 out-of-pocket deal is blocked. Inverted scenarios warn but still allow submission. |
 | `live/persistence.spec.ts` | 5 | Autosave puts **`"0.0699"` on the wire for 6.99%**. Values survive a reload. The live preview equals the API's cash-on-cash. A draft can be resumed from the dashboard. A submitted attempt is locked. The reference underwriting is never shown. |
-| `live/leaderboard.spec.ts` | 1 | Three attempts are ranked by closeness, not submission order. The current attempt is highlighted with "2nd of 3", and the rows link to each other. |
+| `live/leaderboard.spec.ts` | 1 | On the *Your attempts* tab, three attempts are ranked by closeness, not submission order. The current attempt is highlighted with "2nd of 3", and the rows link to each other. |
+| `live/team.spec.ts` | 1 | Your real attempts join the demo team. A low first try and a Best retake give a latest-based average of 100 and a first try of 40. You rank 3rd of 7 on the team and 1st on the property, the retake is marked, and the dashboard shows your team rank. |
 
 ### Mocked project (no backend)
 
 | Spec | Covers |
 |---|---|
+| `mocked/team.spec.ts` (6) | The team page ranks 7 trainees with the demo badge. The skills grid flags each teammate's pattern and your own running costs. A trainee profile shows the coaching note and 6 attempts. Your profile links to your results. The results *Team* tab ranks trainees, and an unknown trainee shows not-found. |
 | `mocked/resilience.spec.ts` (8) | A failed autosave shows *Couldn't save* and *Retry* recovers. A failed submission keeps the work. A 422 from the API lands on the right field. An empty training set shows an empty state. An API outage shows an error and recovers on retry. The reference guard holds. Results render from recorded data. An unknown result shows not-found. |
 | `mocked/demo-failure.spec.ts` | Deliberately failing and opt-in (`E2E_DEMO_FAILURE=1`), to demonstrate the failure artifacts. |
 
-### Unit tests (Vitest, 45)
+### Unit tests (Vitest, 55)
 
 - `calc.test.ts` runs the live-preview calculator against **the backend's own test vectors** from `backend/tests/test_underwriting_calculator.py`, and against numbers captured from a real API response. It also covers the edge cases: 0% interest, an all-cash purchase, and incomplete inputs.
 - `mappers.test.ts` covers number parsing, percent ↔ fraction conversion without float noise, prefills, valid-sections-only payloads, empty versus half-filled rows, and mapping API error paths back to form fields.
 - `review-and-scoring.test.ts` covers the review model, the deviation sentences, the brief's band table, and leaderboard ranking, ties included.
 - `fixtures.test.ts` parses every recorded API fixture with the app's Zod schemas, so the mocks can't silently drift from the contract.
+- `team.test.ts` covers grading boundaries, the latest-per-property average, first tries and retakes, skill levels and ranking ties. It checks that the demo data is fixed and uses only seeded properties, that each demo teammate triggers exactly the coaching note they illustrate, and that your recorded attempt lands in the right place.
 
 ## Fixture and case-generation strategy
 
