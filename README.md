@@ -96,6 +96,7 @@ backend/                         # provided API (unchanged)
 ## Assumptions and trade-offs
 
 - **Leaderboard = graded attempts.** The API has no users, so each graded attempt on a property is one leaderboard entry, ranked by closeness to the analyst. With real identities, the same ranking works per trainee.
+- **Retakes are allowed, and every attempt counts on its own.** The brief doesn't say which score counts when a property is retaken, so the app follows the API. A trainee can start a new attempt from the property page or the results page. Each submission is graded and stored separately. Dashboard cards show both the latest and the best score. The dashboard's average score is the API's `average_accuracy`, which uses the latest attempt on each property. The leaderboard ranks every attempt. The next bullet covers how the reveal affects retakes.
 - **The analyst's numbers are revealed after submitting.** The brief only requires hiding them while the trainee works. Showing them afterwards is the most useful feedback. As a result, a retry can copy the answer. A real deployment might delay the reveal or cap retries.
 - **Submitted attempts are locked.** The API would accept edits to a submitted draft, but the UI shows a locked notice and offers a new attempt so grades stay meaningful.
 - **Tax inputs are prefilled** with the brief's standard 20 / 25 / 60 / 37%. They are clearly marked and stay editable. The purchase price is prefilled from the listing.
