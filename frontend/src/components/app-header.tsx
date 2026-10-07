@@ -1,6 +1,6 @@
 "use client";
 
-import { GraduationCap, LayoutDashboard } from "lucide-react";
+import { GraduationCap, LayoutDashboard, Users } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,7 +10,10 @@ import { cn } from "@/lib/utils";
 
 export function AppHeader() {
   const pathname = usePathname();
-  const onDashboard = pathname === "/";
+  const links = [
+    { href: "/", label: "Dashboard", icon: LayoutDashboard, active: pathname === "/" },
+    { href: "/team", label: "Team", icon: Users, active: pathname.startsWith("/team") },
+  ];
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/70">
@@ -19,24 +22,27 @@ export function AppHeader() {
           <span className="grid size-8 place-items-center rounded-lg bg-primary text-primary-foreground shadow-card">
             <GraduationCap className="size-[18px]" aria-hidden />
           </span>
-          <span className="flex flex-col leading-none">
+          <span className="hidden flex-col leading-none min-[420px]:flex">
             <span className="text-sm font-semibold tracking-tight">Underwriting Lab</span>
             <span className="mt-0.5 hidden text-[11px] text-muted-foreground sm:block">Analyst training</span>
           </span>
         </Link>
 
-        <nav aria-label="Main" className="ml-2 hidden items-center gap-1 sm:flex">
-          <Link
-            href="/"
-            aria-current={onDashboard ? "page" : undefined}
-            className={cn(
-              "inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-              onDashboard && "bg-muted text-foreground",
-            )}
-          >
-            <LayoutDashboard className="size-4" aria-hidden />
-            Dashboard
-          </Link>
+        <nav aria-label="Main" className="flex items-center gap-1 sm:ml-2">
+          {links.map(({ href, label, icon: Icon, active }) => (
+            <Link
+              key={href}
+              href={href}
+              aria-current={active ? "page" : undefined}
+              className={cn(
+                "inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
+                active && "bg-muted text-foreground",
+              )}
+            >
+              <Icon className="size-4" aria-hidden />
+              {label}
+            </Link>
+          ))}
         </nav>
 
         <div className="ml-auto flex items-center gap-1">

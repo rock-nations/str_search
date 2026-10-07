@@ -18,6 +18,9 @@ import { useDashboard, useSubmissions } from "@/lib/api/hooks";
 import type { Dashboard, DashboardProperty, TrainingStatus } from "@/lib/api/schemas";
 import { formatMoney } from "@/lib/format";
 import { parseNumber } from "@/lib/parse";
+import { ordinal } from "@/lib/scoring";
+
+import { useTeam } from "../team/use-team";
 
 import { PropertyCard, primaryAction, streetOf } from "./property-card";
 import { RecentAttempts } from "./recent-attempts";
@@ -27,6 +30,9 @@ type StatusFilter = "all" | TrainingStatus;
 export function DashboardView() {
   const dashboard = useDashboard();
   const submissions = useSubmissions();
+  const team = useTeam({ skills: false });
+  const you = team.data?.ranking.find((r) => r.trainee.isYou);
+  const teamRank = you && you.averageScore !== null ? { rank: you.rank, of: team.data?.ranking.length ?? 0 } : null;
 
   return (
     <PageContainer className="pb-16">
@@ -47,7 +53,7 @@ export function DashboardView() {
         />
       ) : (
         <div className="space-y-10">
-          <SummaryTiles data={dashboard.data} />
+          <SummaryTiles data={dashboard.data} teamRank={teamRank} />
           <NextUp properties={dashboard.data.properties} />
           <TrainingCases properties={dashboard.data.properties} summary={dashboard.data.summary} />
           <section aria-labelledby="recent-attempts" className="space-y-4">
@@ -73,7 +79,7 @@ export function DashboardView() {
   );
 }
 
-function SummaryTiles({ data }: { data: Dashboard }) {
+function SummaryTiles({ data, teamRank }: { data: Dashboard; teamRank: { rank: number; of: number } | null }) {
   const { summary, properties } = data;
   const pct = summary.total_properties ? (summary.submitted / summary.total_properties) * 100 : 0;
   const bestCount = properties.filter((p) => p.best_rating === "best").length;
@@ -104,7 +110,20 @@ function SummaryTiles({ data }: { data: Dashboard }) {
         label="Average score"
         icon={<Gauge />}
         value={summary.average_accuracy === null ? "—" : summary.average_accuracy.toFixed(0)}
-        hint={summary.average_accuracy === null ? "Submit a case to get scored" : "Latest attempt on each property, out of 100"}
+        hint={
+          summary.average_accuracy === null ? (
+            "Submit a case to get scored"
+          ) : teamRank ? (
+            <span data-testid="summary-team-rank">
+              {ordinal(teamRank.rank)} of {teamRank.of} on the team ·{" "}
+              <Link href="/team" className="font-medium text-primary hover:underline">
+                View team
+              </Link>
+            </span>
+          ) : (
+            "Latest attempt on each property, out of 100"
+          )
+        }
       />
       <StatTile
         testId="summary-in-progress"

@@ -71,7 +71,9 @@ test("a trainee completes and submits a full underwriting", async ({ page, works
     await expect(page.getByTestId("score-explanation")).toHaveText(
       "Your Mid forecast of $130,000 was 4.0% above the analyst's $125,000.",
     );
-    await expect(page.getByTestId("leaderboard-position")).toContainText("1st");
+    // $130,000 is 4% off; two demo teammates were closer on this property.
+    await expect(page.getByTestId("team-position")).toContainText("3rd");
+    await expect(page.getByTestId("team-standing-you")).toHaveAttribute("data-current", "true");
     await expect(page.getByTestId("compare-mid")).toContainText("$125,000");
   });
 

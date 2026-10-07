@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueries, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "./endpoints";
 import type { SaveUnderwritingPayload, Submission } from "./schemas";
@@ -41,6 +41,29 @@ export function useUnderwriting(id: number | null | undefined) {
     queryKey: queryKeys.underwriting(id ?? -1),
     queryFn: ({ signal }) => api.underwriting(id as number, signal),
     enabled: typeof id === "number" && Number.isFinite(id),
+  });
+}
+
+/**
+ * Several underwritings at once, keyed by id. Used by the team view to compare
+ * your submitted attempts with the analyst's. Callers must only pass ids of
+ * submitted attempts and their references, never a reference you haven't earned.
+ */
+export function useUnderwritings(ids: number[], options: { enabled?: boolean } = {}) {
+  return useQueries({
+    queries: ids.map((id) => ({
+      queryKey: queryKeys.underwriting(id),
+      queryFn: ({ signal }: { signal: AbortSignal }) => api.underwriting(id, signal),
+      staleTime: Infinity,
+      enabled: options.enabled ?? true,
+    })),
+    combine: (results) => ({
+      byId: new Map(
+        results.flatMap((result, index) => (result.data ? [[ids[index], result.data] as const] : [])),
+      ),
+      isPending: results.some((result) => result.isPending && result.fetchStatus !== "idle"),
+      isError: results.some((result) => result.isError),
+    }),
   });
 }
 

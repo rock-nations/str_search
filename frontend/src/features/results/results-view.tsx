@@ -139,7 +139,7 @@ export function ResultsView({ id }: { id: number }) {
             {attempts.isError ? (
               <ErrorState title="Couldn't load the leaderboard" error={attempts.error} onRetry={() => attempts.refetch()} />
             ) : attempts.data ? (
-              <Leaderboard submissions={attempts.data} currentId={s.id} />
+              <Leaderboard submissions={attempts.data} submission={s} />
             ) : (
               <Skeleton className="h-80 rounded-xl" />
             )}

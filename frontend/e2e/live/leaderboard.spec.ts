@@ -2,8 +2,8 @@ import { resetDatabase } from "../support/api";
 import { expect, test } from "../support/test";
 
 /**
- * The leaderboard ranks every graded attempt on a property by closeness to
- * the analyst (the API has no trainee identity, so each attempt is an entry).
+ * "Your attempts" ranks each of your graded attempts on a property by
+ * closeness to the analyst, regardless of the order they were submitted.
  */
 test.beforeAll(() => resetDatabase());
 
@@ -15,6 +15,7 @@ test("attempts are ranked by closeness and the current one is highlighted", asyn
 
   await page.goto(`/submissions/${medium}`);
   const board = page.getByTestId("leaderboard");
+  await board.getByRole("tab", { name: /Your attempts/ }).click();
   await expect(page.getByTestId("leaderboard-position")).toContainText("2nd");
   await expect(page.getByTestId("leaderboard-position")).toContainText("of 3");
 
@@ -29,5 +30,6 @@ test("attempts are ranked by closeness and the current one is highlighted", asyn
   // Other attempts link to their own results.
   await rows.nth(0).getByRole("link").click();
   await expect(page).toHaveURL(new RegExp(`/submissions/${best}`));
+  await page.getByTestId("leaderboard").getByRole("tab", { name: /Your attempts/ }).click();
   await expect(page.getByTestId("leaderboard-position")).toContainText("1st");
 });

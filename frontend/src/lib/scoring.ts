@@ -11,6 +11,22 @@ export const RATING_META: Record<Rating, { label: string; score: number; range: 
   low: { label: "Low", score: 40, range: "More than 25% away" },
 };
 
+/**
+ * Grades an absolute deviation exactly like the API: both limits inclusive.
+ * Used for demo teammates, whose attempts never went through the API.
+ */
+export function gradeDeviation(deviation: number | null): { rating: Rating; score: number } {
+  const rating: Rating =
+    deviation === null
+      ? "low"
+      : Math.abs(deviation) <= BEST_THRESHOLD + 1e-9
+        ? "best"
+        : Math.abs(deviation) <= MEDIUM_THRESHOLD + 1e-9
+          ? "medium"
+          : "low";
+  return { rating, score: RATING_META[rating].score };
+}
+
 /** (candidate − reference) ÷ reference. Positive means the trainee forecast higher. */
 export function signedDeviation(candidate: number | null, reference: number | null): number | null {
   if (candidate === null || reference === null || reference === 0) return null;

@@ -117,7 +117,9 @@ test("results explain the grade from a recorded submission", async ({ page }) =>
     "Your Mid forecast of $130,000 was 4.0% above the analyst's $125,000.",
   );
   await expect(page.getByTestId("stat-deviation")).toHaveText("+4.0%");
-  await expect(page.getByTestId("leaderboard-position")).toContainText("1st");
+  // You (+4%) rank behind two demo teammates who were closer on this property.
+  await expect(page.getByTestId("team-position")).toContainText("3rd");
+  await expect(page.getByTestId("team-position")).toContainText("of 7 trainees");
   await expect(page.getByTestId("compare-mid")).toContainText("$130,000");
   await expect(page.getByTestId("takeaways")).toContainText("monthly operating expenses");
 });
