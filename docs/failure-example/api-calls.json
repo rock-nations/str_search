@@ -24,7 +24,7 @@
       },
       "submitted_at": "2026-10-06T18:28:45.025658Z"
     },
-    "durationMs": 40
+    "durationMs": 29
   },
   {
     "method": "GET",
@@ -192,7 +192,7 @@
         }
       ]
     },
-    "durationMs": 177
+    "durationMs": 37
   },
   {
     "method": "GET",
@@ -228,7 +228,7 @@
       },
       "created_at": "2026-10-06T18:28:44.204912Z"
     },
-    "durationMs": 169
+    "durationMs": 33
   },
   {
     "method": "GET",
@@ -257,7 +257,7 @@
         "submitted_at": "2026-10-06T18:28:45.025658Z"
       }
     ],
-    "durationMs": 167
+    "durationMs": 32
   },
   {
     "method": "GET",
@@ -428,7 +428,7 @@
       ],
       "comp_set": []
     },
-    "durationMs": 165
+    "durationMs": 29
   },
   {
     "method": "GET",
@@ -691,6 +691,6 @@
         }
       ]
     },
-    "durationMs": 162
+    "durationMs": 28
   }
 ]

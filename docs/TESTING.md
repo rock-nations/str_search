@@ -107,7 +107,7 @@ E2E_DEMO_FAILURE=1 npx playwright test --project=mocked demo-failure
 - [`screenshot.png`](failure-example/screenshot.png) shows the page at failure: a score of 100, Best.
 - [`error-context.md`](failure-example/error-context.md) shows the assertion `expected "70", received "100"` and the page snapshot.
 - [`api-calls.json`](failure-example/api-calls.json) shows that `GET /submissions/1` returned `"rating": "best", "accuracy": "100.00"`.
-- [`trace.zip`](failure-example/trace.zip) can be opened with `npx playwright show-trace docs/failure-example/trace.zip`.
+- [`trace.zip`](failure-example/trace.zip) can be opened from the `frontend` folder with `npx playwright show-trace ../docs/failure-example/trace.zip`.
 
 ### How I debug one
 

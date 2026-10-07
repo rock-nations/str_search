@@ -22,7 +22,9 @@ function useCountUp(target: number, durationMs = 700) {
     let frame = 0;
     const start = performance.now();
     const tick = (now: number) => {
-      const progress = Math.min(1, (now - start) / durationMs);
+      // The first frame's timestamp can be slightly earlier than `start`; clamp so
+      // the count never dips below zero.
+      const progress = Math.min(1, Math.max(0, (now - start) / durationMs));
       const eased = 1 - (1 - progress) ** 3;
       setValue(Math.round(target * eased));
       if (progress < 1) frame = requestAnimationFrame(tick);
