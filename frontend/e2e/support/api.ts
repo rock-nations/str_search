@@ -1,12 +1,19 @@
 import { execSync } from "node:child_process";
+import { existsSync } from "node:fs";
 import path from "node:path";
 
 import type { APIRequestContext } from "@playwright/test";
 
 export const API_BASE_URL = (process.env.API_BASE_URL ?? "http://localhost:8000").replace(/\/$/, "");
 
-const COMPOSE_FILE = path.resolve(__dirname, "..", "..", "..", "backend", "docker-compose.yml");
-export const DEFAULT_RESET_COMMAND = `docker compose -f "${COMPOSE_FILE}" exec -T api python -m scripts.seed --reset`;
+// The provided API lives in its own repository: BACKEND_DIR, then ./backend, then a sibling clone.
+const REPO_ROOT = path.resolve(__dirname, "..", "..", "..");
+const BACKEND_DIR = process.env.BACKEND_DIR
+  ? path.resolve(process.env.BACKEND_DIR)
+  : ([path.join(REPO_ROOT, "backend"), path.join(REPO_ROOT, "..", "strs_fe_assessment_v1", "backend")].find((dir) =>
+      existsSync(path.join(dir, "docker-compose.yml")),
+    ) ?? path.join(REPO_ROOT, "backend"));
+export const DEFAULT_RESET_COMMAND = `docker compose -f "${path.join(BACKEND_DIR, "docker-compose.yml")}" exec -T api python -m scripts.seed --reset`;
 
 /**
  * Puts the backend back to seed data: 4 markets, 6 properties, 6 references,
@@ -22,7 +29,7 @@ export function resetDatabase(): void {
     const output = (error as { stderr?: Buffer }).stderr?.toString() ?? String(error);
     throw new Error(
       `Couldn't reset the training database.\nCommand: ${command}\n${output}\n` +
-        "Start the backend with `docker compose up -d` in backend/, set E2E_RESET_COMMAND, or skip with E2E_SKIP_RESET=1.",
+        "Start the provided backend with `docker compose up -d` in its backend/ folder (set BACKEND_DIR if it isn't found), set E2E_RESET_COMMAND, or skip with E2E_SKIP_RESET=1.",
     );
   }
 }

@@ -4,7 +4,7 @@
  * Playwright project and the unit tests.
  *
  * Run it against a freshly reset backend so ids are stable:
- *   docker compose -f ../backend/docker-compose.yml exec -T api python -m scripts.seed --reset
+ *   docker compose -f "$BACKEND_DIR/docker-compose.yml" exec -T api python -m scripts.seed --reset
  *   API_BASE_URL=http://localhost:8000 node scripts/capture-fixtures.mjs
  */
 import { mkdir, writeFile } from "node:fs/promises";

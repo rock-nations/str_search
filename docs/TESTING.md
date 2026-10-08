@@ -12,7 +12,7 @@ npm test                    # Vitest unit tests
 npm run e2e:report          # HTML report of the last run
 ```
 
-`npm run e2e` exits non-zero when anything fails, so it works as-is in CI. If the backend uses another port, run `API_PORT=8001 npm run e2e`. Any extra arguments go to `playwright test`, for example `npm run e2e -- --grep "Ski View"`.
+`npm run e2e` exits non-zero when anything fails, so it works as-is in CI. It finds the provided backend through `BACKEND_DIR`, then `./backend`, then a clone of the assessment repository next to this one. If the backend uses another port, run `API_PORT=8001 npm run e2e`. Any extra arguments go to `playwright test`, for example `npm run e2e -- --grep "Ski View"`.
 
 Playwright starts its own **production build** of the app on port 3100. That is what a reviewer would run, and it is free of dev-mode overlays and double renders.
 
@@ -47,7 +47,7 @@ Running 51 tests using 1 worker
 
 ### Unit tests (Vitest, 55)
 
-- `calc.test.ts` runs the live-preview calculator against **the backend's own test vectors** from `backend/tests/test_underwriting_calculator.py`, and against numbers captured from a real API response. It also covers the edge cases: 0% interest, an all-cash purchase, and incomplete inputs.
+- `calc.test.ts` runs the live-preview calculator against **the backend's own test vectors** from the provided backend's `tests/test_underwriting_calculator.py`, and against numbers captured from a real API response. It also covers the edge cases: 0% interest, an all-cash purchase, and incomplete inputs.
 - `mappers.test.ts` covers number parsing, percent ↔ fraction conversion without float noise, prefills, valid-sections-only payloads, empty versus half-filled rows, and mapping API error paths back to form fields.
 - `review-and-scoring.test.ts` covers the review model, the deviation sentences, the brief's band table, and leaderboard ranking, ties included.
 - `fixtures.test.ts` parses every recorded API fixture with the app's Zod schemas, so the mocks can't silently drift from the contract.
@@ -58,7 +58,7 @@ Running 51 tests using 1 worker
 **Live data is deterministic by construction.** The backend seeds the same 4 markets, 6 properties and 6 reference underwritings for everyone. Before the live project runs, a setup project checks the API is reachable (failing with a "start the backend" message if not) and resets it:
 
 ```
-docker compose -f ../backend/docker-compose.yml exec -T api python -m scripts.seed --reset
+docker compose -f "$BACKEND_DIR/docker-compose.yml" exec -T api python -m scripts.seed --reset
 ```
 
 **Each live spec file also resets in `beforeAll`**, so no file depends on another's leftovers or on run order. Tests run with one worker because they share one database.

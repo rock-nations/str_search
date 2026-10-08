@@ -23,6 +23,7 @@ The Next.js app for the underwriting training platform. Setup, tests and an over
 |---|---|---|
 | `API_BASE_URL` | `http://localhost:8000` | The `/api/backend` proxy, read at request time, and the Playwright helpers |
 | `API_PORT` | `8000` | `npm run e2e`, when the backend is published on another port |
+| `BACKEND_DIR` | `../backend`, then `../../strs_fe_assessment_v1/backend` | The provided backend folder: `npm run e2e` starts it and the live tests reset it |
 | `E2E_PORT` | `3100` | Port of the app server Playwright starts |
 | `E2E_RESET_COMMAND` | `docker compose … exec -T api python -m scripts.seed --reset` | How the live tests reset the database |
 | `E2E_SKIP_RESET` | unset | Set to `1` to skip resets. Tests are then no longer deterministic. |

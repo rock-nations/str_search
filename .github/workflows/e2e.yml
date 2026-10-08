@@ -14,6 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Check out the provided backend
+        uses: actions/checkout@v4
+        with:
+          repository: fahimstrsearch/strs_fe_assessment_v1
+          path: strs_fe_assessment_v1
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -32,6 +38,7 @@ jobs:
         run: npm run e2e
         env:
           CI: "true"
+          BACKEND_DIR: ${{ github.workspace }}/strs_fe_assessment_v1/backend
 
       - name: Upload report and failure artifacts
         if: always()

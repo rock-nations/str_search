@@ -1,1 +1,4 @@
 .DS_Store
+
+# The provided API lives in its own repository; a local copy here is never committed.
+/backend/

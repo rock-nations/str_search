@@ -2,7 +2,7 @@
 
 A training platform where new analysts practise underwriting short-term rental properties. A trainee picks a property, works through the underwriting, and submits it. They then see how close their **Mid revenue forecast** landed to the analyst's hidden reference, what that scored, and where they stand on the team. Lead analysts get a team view that shows who is doing best and what each trainee should practise.
 
-This repository is the Frontend Engineer Assessment submission. `frontend/` is the new work; `backend/` is the provided FastAPI service, unchanged.
+This repository is the Frontend Engineer Assessment submission: the Next.js app in `frontend/`. It runs against the provided FastAPI backend, which stays in the [assessment repository](https://github.com/fahimstrsearch/strs_fe_assessment_v1) and isn't copied here.
 
 ![Underwriting workspace, Analysis step](docs/screenshots/04-workspace-analysis-1440-light.png)
 
@@ -17,12 +17,15 @@ This repository is the Frontend Engineer Assessment submission. `frontend/` is t
 You need **Docker** (Docker Desktop, or Colima on macOS) and **Node.js 20.9+**.
 
 ```bash
-# 1. The API: Postgres + FastAPI, migrated and seeded on first start
-cd backend
+# 1. The provided API: Postgres + FastAPI, migrated and seeded on first start
+git clone https://github.com/fahimstrsearch/strs_fe_assessment_v1.git
+cd strs_fe_assessment_v1/backend
 docker compose up -d --build --wait      # http://localhost:8000/docs
 
-# 2. The app
-cd ../frontend
+# 2. The app, cloned next to it
+cd ../..
+git clone https://github.com/rock-nations/str_search.git
+cd str_search/frontend
 npm install
 npm run dev                               # http://localhost:3000
 ```
@@ -33,7 +36,7 @@ The app talks to the API through its own `/api/backend/*` route, so there is no 
 cp .env.example .env.local    # then edit API_BASE_URL, e.g. http://localhost:8001
 ```
 
-To run the API on another port: `API_PORT=8001 docker compose up -d --wait` in `backend/`.
+To run the API on another port: `API_PORT=8001 docker compose up -d --wait` in the backend folder.
 
 ## Tests
 
@@ -46,6 +49,8 @@ npm run test:e2e:mocked   # Playwright against recorded API fixtures; no Docker 
 npm test                  # unit tests (Vitest): calculations, mappers, scoring, fixtures
 npm run e2e:report        # open the HTML report from the last run
 ```
+
+`npm run e2e` finds the provided backend in a clone of the assessment repository next to this one, as in the quick start. If it lives elsewhere, point to its `backend/` folder with `BACKEND_DIR=/path/to/backend npm run e2e`.
 
 | Suite | Tests | What it covers |
 |---|---|---|
@@ -94,7 +99,6 @@ frontend/
 ├── tests/unit/                  # Vitest
 └── scripts/                     # e2e runner, fixture capture, screenshots
 docs/                            # design, testing, screenshots, failure example
-backend/                         # provided API (unchanged)
 ```
 
 ## Assumptions and trade-offs
@@ -107,4 +111,4 @@ backend/                         # provided API (unchanged)
 - **Out of scope:** comp sets, deal pitch and notes, bedrooms and sleeps, renovation level and deal complexity. The API accepts these fields, but the brief scopes the screens without them.
 - **Client-side data fetching.** Pages are server components that render client feature modules, and data loads in the browser through TanStack Query. That suits a highly interactive internal tool, and it lets Playwright control every API response. [DESIGN.md](docs/DESIGN.md) has the reasoning.
 - **Desktop first.** The workspace is designed for a laptop or larger. It still works on tablets and phones: the stepper becomes tabs and the deal summary moves into a bottom sheet.
-- **CI.** `.github/workflows/e2e.yml` runs lint, typecheck, unit tests and the full Playwright suite with Docker, and uploads the report. It has not run yet because the repository hasn't been pushed.
+- **CI.** `.github/workflows/e2e.yml` checks out the provided backend, then runs lint, typecheck, unit tests and the full Playwright suite with Docker, and uploads the report.
