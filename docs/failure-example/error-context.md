@@ -16,13 +16,13 @@ Timeout:  3000ms
 Call log:
   - Expect "toHaveAttribute" getByTestId('score-value') with timeout 3000ms
   - waiting for getByTestId('score-value')
-    - locator resolved to <p data-score="100" data-testid="score-value" class="figure text-[40px] leading-none font-semibold tracking-tight">11</p>
+    - locator resolved to <p data-score="100" data-testid="score-value" class="figure text-[40px] leading-none font-semibold tracking-tight">10</p>
     - unexpected value "100"
-    - locator resolved to <p data-score="100" data-testid="score-value" class="figure text-[40px] leading-none font-semibold tracking-tight">40</p>
+    - locator resolved to <p data-score="100" data-testid="score-value" class="figure text-[40px] leading-none font-semibold tracking-tight">44</p>
     - unexpected value "100"
-    - locator resolved to <p data-score="100" data-testid="score-value" class="figure text-[40px] leading-none font-semibold tracking-tight">66</p>
+    - locator resolved to <p data-score="100" data-testid="score-value" class="figure text-[40px] leading-none font-semibold tracking-tight">69</p>
     - unexpected value "100"
-    - locator resolved to <p data-score="100" data-testid="score-value" class="figure text-[40px] leading-none font-semibold tracking-tight">83</p>
+    - locator resolved to <p data-score="100" data-testid="score-value" class="figure text-[40px] leading-none font-semibold tracking-tight">85</p>
     5 × unexpected value "100"
       - locator resolved to <p data-score="100" data-testid="score-value" class="figure text-[40px] leading-none font-semibold tracking-tight">100</p>
     - unexpected value "100"
