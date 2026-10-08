@@ -32,7 +32,8 @@ export function BandScale({
   const deviation = candidate === null ? null : (candidate - reference) / reference;
   // Zoom so the marker is visible, but keep the bands readable.
   const domain = Math.min(1, Math.max(0.4, deviation === null ? 0 : Math.abs(deviation) * 1.2));
-  const pos = (x: number) => `${((Math.max(-domain, Math.min(domain, x)) + domain) / (2 * domain)) * 100}%`;
+  const fraction = (x: number) => (Math.max(-domain, Math.min(domain, x)) + domain) / (2 * domain);
+  const pos = (x: number) => `${fraction(x) * 100}%`;
   const offScale = deviation !== null && Math.abs(deviation) > domain;
 
   const segments = [
@@ -43,22 +44,24 @@ export function BandScale({
     { from: mediumThreshold, to: domain, className: "bg-danger/15" },
   ];
   const ticks = [-mediumThreshold, -bestThreshold, bestThreshold, mediumThreshold];
+  // Zoomed far out, the ±25% labels sit too close to the analyst's on a phone.
+  const crowdedOnPhone = domain > 0.65;
 
   return (
     <figure aria-label="Where your Mid forecast landed relative to the analyst's" data-testid="band-scale">
       <div className="relative h-16">
         {deviation !== null && (
-          <div
-            className="absolute bottom-1 flex -translate-x-1/2 flex-col items-center"
-            style={{ left: pos(deviation) }}
-            data-testid="band-marker-you"
-          >
-            <span className={cn("figure flex items-center gap-0.5 rounded-md px-2 py-1 text-xs font-semibold whitespace-nowrap shadow-card", markerTone[rating])}>
+          <div className="absolute bottom-1 flex flex-col" style={{ left: pos(deviation) }} data-testid="band-marker-you">
+            {/* The label's anchor slides with the marker, so it never runs off either end of the scale. */}
+            <span
+              className={cn("figure flex w-max items-center gap-0.5 rounded-md px-2 py-1 text-xs font-semibold whitespace-nowrap shadow-card", markerTone[rating])}
+              style={{ transform: `translateX(${-fraction(deviation) * 100}%)` }}
+            >
               {offScale && deviation < 0 && <ChevronLeft className="size-3" aria-hidden />}
               You · {formatMoney(candidate)}
               {offScale && deviation > 0 && <ChevronRight className="size-3" aria-hidden />}
             </span>
-            <span className={cn("mt-0.5 size-2 rotate-45", markerTone[rating])} aria-hidden />
+            <span className={cn("mt-0.5 size-2 -translate-x-1/2 rotate-45", markerTone[rating])} aria-hidden />
           </div>
         )}
       </div>
@@ -92,6 +95,7 @@ export function BandScale({
               "absolute -translate-x-1/2 text-center whitespace-nowrap",
               // Inner (±10%) labels crowd the analyst label when zoomed out or on narrow screens.
               Math.abs(tick) === bestThreshold && (domain > 0.45 ? "hidden" : "hidden sm:block"),
+              Math.abs(tick) === mediumThreshold && crowdedOnPhone && "hidden sm:block",
             )}
             style={{ left: pos(tick) }}
           >

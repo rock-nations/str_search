@@ -92,9 +92,16 @@ The API serves reference underwritings through the same endpoint as drafts. The 
 
 ## Visual system
 
-- A calm, neutral base with one indigo accent for actions and focus. Semantic colours have fixed meanings: emerald for Best and positive cash flow, amber for Medium and warnings, rose for Low, errors and losses. Each always comes with an icon or text.
+- **STR Search branding.** The look follows [strsearch.com](https://strsearch.com/): its forest green `#0A4B39` for the header band, primary buttons and links, its amber `#E9A753` for the main call to action, and its logo on a white badge in the header, as the site shows it. The badge also keeps the logo readable in dark mode. The dashboard's "Continue where you left off" card uses the site's hero style: a green band, a white headline and an amber button.
+- **Where the brand needed adjusting for an app:**
+  - The site puts white text on amber, which is 2.1:1 contrast. Amber buttons here use the brand green instead (4.9:1, WCAG AA).
+  - Amber text on white also fails contrast, so amber text uses a darker tone.
+  - In dark mode, primary actions use a lighter green, because the brand green would disappear on a dark background.
+  - Amber stays rare, so the one action that matters on a screen stands out.
+- **Semantic colours have fixed meanings:** green for Best and positive cash flow, amber for Medium and warnings, red for Low, errors and losses. Each always comes with an icon or text. Medium shares the brand amber on purpose, since it is the "almost there" tone.
 - Design tokens live in `globals.css` as CSS variables for light and dark themes. A header toggle switches themes, and the server-rendered HTML is identical in both, so there is no hydration mismatch.
-- Geist Sans, a 4 px spacing scale, 12 px card radii, hairline rings and very light shadows. Large type is reserved for the numbers that matter.
+- **Type follows the site's pairing:** Montserrat for headings and Poppins for body text. Poppins has no tabular figures, and its digits have different widths, so money columns wouldn't line up. Every figure therefore uses Montserrat with tabular numerals, which keeps columns aligned and still matches the brand.
+- A 4 px spacing scale, 12 px card radii, hairline rings and light green-tinted shadows like the cards on the site. Large type is reserved for the numbers that matter.
 - Every loading, empty and error state is designed. Skeletons match the final layout. Error states say what happened and offer **Try again**. When the API is down, the proxy returns a clear message rather than a fetch failure.
 - Accessibility: labelled inputs, `aria-invalid` and `aria-describedby`, an `aria-live` save status, focus management for *Fix* links, keyboard-operable steps and switches, and reduced-motion support.
 

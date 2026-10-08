@@ -28,7 +28,7 @@ export function StatTile({
         <p className="text-[13px] font-medium text-muted-foreground">{label}</p>
         {icon && <span className="text-muted-foreground/70 [&_svg]:size-4">{icon}</span>}
       </div>
-      <div className="figure text-2xl leading-none font-semibold tracking-tight sm:text-[28px]" data-slot="value">
+      <div className="figure font-heading text-2xl leading-none font-semibold tracking-tight sm:text-[28px]" data-slot="value">
         {value}
       </div>
       {hint && <div className="text-[13px] text-muted-foreground">{hint}</div>}

@@ -52,7 +52,7 @@ export function PageHeader({
         {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
         {eyebrow}
         <h1 className="text-2xl leading-8 font-semibold tracking-tight text-balance">{title}</h1>
-        {description && <p className="max-w-2xl text-sm leading-6 text-muted-foreground">{description}</p>}
+        {description && <p className="max-w-2xl text-sm leading-6 text-pretty text-muted-foreground">{description}</p>}
       </div>
       {actions && <div className="flex shrink-0 flex-wrap items-center gap-2">{actions}</div>}
     </div>

@@ -145,13 +145,20 @@ function TeamStandings({ submission }: { submission: Submission }) {
                   </span>
                 </TableCell>
                 <TableCell>
-                  <Link href={`/team/${trainee.id}`} className="inline-flex items-center gap-2.5 hover:underline">
+                  <div className="flex items-center gap-2.5">
                     <TraineeAvatar trainee={trainee} size="sm" />
-                    <span className={cn("font-medium", you && "text-accent-foreground")}>{trainee.name}</span>
-                  </Link>
-                  {attempt.attemptNumber > 1 && (
-                    <span className="ml-2 text-xs text-muted-foreground">retake {attempt.attemptNumber - 1}</span>
-                  )}
+                    <div>
+                      <Link
+                        href={`/team/${trainee.id}`}
+                        className={cn("font-medium hover:underline", you && "text-accent-foreground")}
+                      >
+                        {trainee.name}
+                      </Link>
+                      {attempt.attemptNumber > 1 && (
+                        <span className="block text-xs text-muted-foreground">retake {attempt.attemptNumber - 1}</span>
+                      )}
+                    </div>
+                  </div>
                 </TableCell>
                 <TableCell className="figure text-right font-medium">{formatMoney(forecast)}</TableCell>
                 <TableCell className="figure hidden text-right text-muted-foreground sm:table-cell">

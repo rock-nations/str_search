@@ -18,6 +18,11 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
+        // STR Search's amber call to action. Green text, because white on amber fails contrast.
+        cta: "bg-cta font-semibold text-cta-foreground shadow-[0_1px_0_0_oklch(0.45_0.1_60/0.35),0_1px_3px_0_oklch(0.45_0.1_60/0.25)] hover:bg-[color-mix(in_oklch,var(--cta),white_14%)] focus-visible:border-transparent focus-visible:ring-cta/50",
+        // Quiet controls that sit on the forest-green brand band.
+        "brand-ghost":
+          "text-brand-foreground/80 hover:bg-white/10 hover:text-brand-foreground aria-expanded:bg-white/12 aria-expanded:text-brand-foreground focus-visible:border-transparent focus-visible:ring-cta/60",
       },
       size: {
         default:

@@ -103,7 +103,7 @@ export function ResultsView({ id }: { id: number }) {
             </div>
 
             <div className="space-y-5">
-              <dl className="grid grid-cols-3 divide-x rounded-lg border">
+              <dl className="grid grid-cols-1 divide-y rounded-lg border sm:grid-cols-3 sm:divide-x sm:divide-y-0">
                 <Stat label="Your Mid forecast" value={formatMoney(breakdown.candidate)} testId="stat-candidate" />
                 <Stat label="Analyst's Mid" value={formatMoney(breakdown.reference)} testId="stat-reference" />
                 <Stat
@@ -134,7 +134,7 @@ export function ResultsView({ id }: { id: number }) {
           </div>
         </section>
 
-        <div className="grid grid-cols-1 items-start gap-6 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+        <div className="grid grid-cols-1 items-start gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
           <div className="space-y-6">
             {attempts.isError ? (
               <ErrorState title="Couldn't load the leaderboard" error={attempts.error} onRetry={() => attempts.refetch()} />
@@ -165,9 +165,9 @@ export function ResultsView({ id }: { id: number }) {
 
 function Stat({ label, value, testId, className }: { label: string; value: string; testId: string; className?: string }) {
   return (
-    <div className="px-4 py-3">
+    <div className="flex items-baseline justify-between gap-3 px-4 py-2.5 sm:block sm:py-3">
       <dt className="text-xs text-muted-foreground">{label}</dt>
-      <dd className={cn("figure mt-1 text-lg font-semibold tracking-tight", className)} data-testid={testId}>
+      <dd className={cn("figure text-base font-semibold tracking-tight sm:mt-1 sm:text-lg", className)} data-testid={testId}>
         {value}
       </dd>
     </div>
@@ -227,7 +227,7 @@ function ResultsSkeleton() {
       </div>
       <div className="space-y-6" aria-busy="true">
         <Skeleton className="h-64 rounded-xl" />
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
           <Skeleton className="h-80 rounded-xl" />
           <Skeleton className="h-80 rounded-xl" />
         </div>

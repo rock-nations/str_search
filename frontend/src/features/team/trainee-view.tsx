@@ -242,13 +242,26 @@ function AttemptHistory({ row, data }: { row: RankedTrainee; data: TeamData }) {
           <Table className="min-w-[720px]" data-testid="attempt-history">
             <TableHeader>
               <TableRow className="hover:bg-transparent">
-                <TableHead className="pl-5">Property</TableHead>
-                <TableHead>Attempt</TableHead>
-                <TableHead>Submitted</TableHead>
-                <TableHead className="text-right">Mid vs analyst</TableHead>
-                <TableHead className="text-right">Setup vs analyst</TableHead>
-                <TableHead className="text-right">Running costs vs analyst</TableHead>
-                <TableHead className="pr-5 text-right">Score</TableHead>
+                <TableHead rowSpan={2} className="pl-5 align-bottom">
+                  Property
+                </TableHead>
+                <TableHead rowSpan={2} className="align-bottom">
+                  Attempt
+                </TableHead>
+                <TableHead rowSpan={2} className="align-bottom">
+                  Submitted
+                </TableHead>
+                <TableHead colSpan={3} className="h-8 border-b text-center text-xs">
+                  Miss vs analyst
+                </TableHead>
+                <TableHead rowSpan={2} className="pr-5 text-right align-bottom">
+                  Score
+                </TableHead>
+              </TableRow>
+              <TableRow className="hover:bg-transparent">
+                <TableHead className="text-right">Mid revenue</TableHead>
+                <TableHead className="text-right">Setup</TableHead>
+                <TableHead className="text-right">Running costs</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -267,7 +280,7 @@ function AttemptHistory({ row, data }: { row: RankedTrainee; data: TeamData }) {
                       )}
                       <span className="block text-xs font-normal text-muted-foreground">{property?.market_name}</span>
                     </TableCell>
-                    <TableCell className="figure">{attempt.attemptNumber === 1 ? "First try" : `Retake ${attempt.attemptNumber - 1}`}</TableCell>
+                    <TableCell className="whitespace-nowrap">{attempt.attemptNumber === 1 ? "First try" : `Retake ${attempt.attemptNumber - 1}`}</TableCell>
                     <TableCell className="text-muted-foreground">{formatDateTime(attempt.submittedAt)}</TableCell>
                     <TableCell className="figure text-right">{formatSignedPercent(attempt.midDeviation)}</TableCell>
                     <TableCell className="figure text-right text-muted-foreground">{formatSignedPercent(attempt.setupDeviation)}</TableCell>

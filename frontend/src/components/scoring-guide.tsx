@@ -12,7 +12,7 @@ export function ScoringGuide() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-1.5 text-muted-foreground">
+        <Button variant="brand-ghost" size="sm" className="gap-1.5">
           <CircleHelp className="size-4" aria-hidden />
           <span className="hidden sm:inline">How scoring works</span>
         </Button>

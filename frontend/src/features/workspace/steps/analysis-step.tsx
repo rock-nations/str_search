@@ -191,9 +191,9 @@ function Figure({
   tone?: "positive" | "negative";
 }) {
   return (
-    <div className="rounded-xl bg-card p-5 shadow-card ring-1 ring-foreground/[0.07]">
-      <div className="flex items-center justify-between gap-2">
-        <p className="text-[13px] font-medium text-muted-foreground">{label}</p>
+    <div className="rounded-xl bg-card p-4 shadow-card ring-1 ring-foreground/[0.07]">
+      <div className="flex items-center justify-between gap-1.5">
+        <p className="text-xs font-medium text-balance text-muted-foreground">{label}</p>
         {formula}
       </div>
       <p

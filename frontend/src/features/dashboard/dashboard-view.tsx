@@ -155,19 +155,20 @@ function NextUp({ properties }: { properties: DashboardProperty[] }) {
   return (
     <section
       aria-label={resuming ? "Continue where you left off" : "Next up"}
-      className="flex flex-col overflow-hidden rounded-xl bg-card shadow-card ring-1 ring-foreground/[0.07] sm:flex-row"
+      className="flex flex-col overflow-hidden rounded-xl bg-brand text-brand-foreground shadow-raised sm:flex-row"
     >
       <PropertyImage src={property.img_src} alt="" className="h-36 w-full shrink-0 sm:h-auto sm:w-56" priority />
-      <div className="flex flex-1 flex-col justify-between gap-4 p-5 sm:flex-row sm:items-center sm:p-6">
+      {/* The diagonal light echoes the angled panels on strsearch.com's course cards. */}
+      <div className="flex flex-1 flex-col justify-between gap-4 bg-[linear-gradient(112deg,transparent_58%,oklch(1_0_0/0.045)_58%)] p-5 sm:flex-row sm:items-center sm:p-6">
         <div className="space-y-1.5">
-          <Eyebrow className="text-primary">{resuming ? "Continue where you left off" : "Next up"}</Eyebrow>
-          <p className="text-lg font-semibold tracking-tight">{streetOf(property.address)}</p>
-          <p className="text-sm text-muted-foreground">
+          <Eyebrow className="text-cta">{resuming ? "Continue where you left off" : "Next up"}</Eyebrow>
+          <p className="font-heading text-xl font-semibold tracking-tight">{streetOf(property.address)}</p>
+          <p className="text-sm text-brand-muted">
             {[property.city, property.state].filter(Boolean).join(", ")} · {property.market_name} ·{" "}
             <span className="figure">{formatMoney(parseNumber(property.unformatted_price))}</span>
           </p>
         </div>
-        <Button asChild size="lg" className="shrink-0 px-4">
+        <Button asChild variant="cta" size="lg" className="h-10 shrink-0 px-5">
           <Link href={action.href}>
             {action.label}
             <ArrowRight data-icon="inline-end" aria-hidden />
@@ -214,10 +215,10 @@ function TrainingCases({
           <p className="text-sm text-muted-foreground">Each case is a real listing with an analyst&apos;s hidden underwriting.</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <Tabs value={status} onValueChange={(v) => setStatus(v as StatusFilter)}>
-            <TabsList aria-label="Filter by status">
+          <Tabs value={status} onValueChange={(v) => setStatus(v as StatusFilter)} className="w-full sm:w-auto">
+            <TabsList aria-label="Filter by status" className="w-full sm:w-fit">
               {(["all", "not_started", "in_progress", "submitted"] as const).map((key) => (
-                <TabsTrigger key={key} value={key} className="gap-1.5 px-2.5">
+                <TabsTrigger key={key} value={key} className="gap-1 px-1.5 text-[13px] sm:gap-1.5 sm:px-2.5 sm:text-sm">
                   {key === "all" ? "All" : key === "not_started" ? "Not started" : key === "in_progress" ? "In progress" : "Submitted"}
                   <span className="figure text-xs text-muted-foreground">{counts[key]}</span>
                 </TabsTrigger>
