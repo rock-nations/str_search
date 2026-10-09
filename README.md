@@ -2,7 +2,7 @@
 
 A training platform where new analysts practise underwriting short-term rental properties. A trainee picks a property, works through the underwriting, and submits it. They then see how close their **Mid revenue forecast** landed to the analyst's hidden reference, what that scored, and where they stand on the team. Lead analysts get a team view that shows who is doing best and what each trainee should practise.
 
-This repository is the Frontend Engineer Assessment submission: the Next.js app in `frontend/`. It runs against the provided FastAPI backend, which stays in the [assessment repository](https://github.com/fahimstrsearch/strs_fe_assessment_v1) and isn't copied here.
+This repository is the Frontend Engineer Assessment submission: the Next.js app in `frontend/`. It runs against the provided FastAPI backend, which stays in the [assessment repository](https://github.com/fahimstrsearch/strs_fe_assessment_v1).
 
 ![Underwriting workspace, Analysis step](docs/screenshots/04-workspace-analysis-1440-light.png)
 
@@ -101,14 +101,13 @@ frontend/
 docs/                            # design, testing, screenshots, failure example
 ```
 
-## Assumptions and trade-offs
+## Trade-offs
 
 - **The team is a mock, as the hiring team asked.** The API has no users, so every attempt submitted through the API is "You" and six teammates are fixed demo data, labelled as such wherever they appear. All of it is frontend only. The demo data is stored as percentages off the analyst, never dollars, so it can't reveal an analyst's number for a property you haven't submitted. With real identities from an API, only the data source in `src/lib/team/` changes.
 - **Retakes are allowed, and the latest attempt counts.** The hiring team confirmed this. A trainee can start a new attempt from the property page or the results page. Each submission is graded and stored separately. Dashboard cards show both the latest and the best score. The dashboard's average score is the API's `average_accuracy`, which uses the latest attempt on each property. The team leaderboard uses the same rule. The "Your attempts" tab on each results page ranks every attempt.
 - **The analyst's numbers are revealed after submitting.** The brief only requires hiding them while the trainee works. Showing them afterwards is the most useful feedback. As a result, a retake can copy the answer. To keep that visible, the team view shows each trainee's first-try average next to their score and flags anyone whose score mostly comes from retakes.
 - **Submitted attempts are locked.** The hiring team confirmed submissions should be final. The API would still accept edits to a submitted draft, but the UI shows a locked notice and offers a new attempt so earlier grades stay unchanged.
 - **Tax inputs are prefilled** with the brief's standard 20 / 25 / 60 / 37%. They are clearly marked and stay editable. The purchase price is prefilled from the listing.
-- **Out of scope:** comp sets, deal pitch and notes, bedrooms and sleeps, renovation level and deal complexity. The API accepts these fields, but the brief scopes the screens without them.
 - **Client-side data fetching.** Pages are server components that render client feature modules, and data loads in the browser through TanStack Query. That suits a highly interactive internal tool, and it lets Playwright control every API response. [DESIGN.md](docs/DESIGN.md) has the reasoning.
 - **Desktop first.** The workspace is designed for a laptop or larger. It still works on tablets and phones: the stepper becomes tabs and the deal summary moves into a bottom sheet.
 - **CI.** `.github/workflows/e2e.yml` checks out the provided backend, then runs lint, typecheck, unit tests and the full Playwright suite with Docker, and uploads the report.
